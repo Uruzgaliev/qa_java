@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.times;
 
 @RunWith(Parameterized.class)
@@ -42,20 +43,17 @@ public class LionTest {
         };
     }
 
-    @Test
-    public void testDoesHaveMane() throws Exception {
-        try {
-            Lion lion = new Lion(sex, new Feline());
-            boolean actualHasMane = lion.doesHaveMane();
-            assertEquals(expectedHasMane, actualHasMane);
-        } catch (Exception e) {
-            if (sex.equals("Неверный пол")) {
-                assertEquals("Используйте допустимые значения пола животного - самец или самка", e.getMessage());
-            } else {
-                throw e;
-            }
-        }
+@Test
+public void testDoesHaveMane() throws Exception {
+    if (sex.equals("Неверный пол")) {
+        Exception exception = assertThrows(Exception.class, () -> new Lion(sex, feline));
+        assertEquals("Используйте допустимые значения пола животного - самец или самка", exception.getMessage());
+    } else {
+        Lion lion = new Lion(sex, feline);
+        boolean actualHasMane = lion.doesHaveMane();
+        assertEquals(expectedHasMane, actualHasMane);
     }
+}
 
 @Test
 public void testGetFood() throws Exception {
