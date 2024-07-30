@@ -59,13 +59,13 @@ public void testDoesHaveMane() throws Exception {
 public void testGetFood() throws Exception {
 
     List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
-    Mockito.when(feline.eatMeat()).thenReturn(expectedFood);
+    Mockito.when(feline.getFood("Хищник")).thenReturn(expectedFood);
 
     Lion lion = new Lion("Самец", feline);
 
     List<String> actualFood = lion.getFood();
 
-    Mockito.verify(feline, Mockito.times(1)).eatMeat();
+    Mockito.verify(feline, Mockito.times(1)).getFood("Хищник");
     assertEquals(expectedFood, actualFood);
 }
 

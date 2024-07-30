@@ -1,29 +1,23 @@
 import com.example.Feline;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.mockito.Spy;
-import org.mockito.junit.MockitoJUnitRunner;
+
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 
-@RunWith(MockitoJUnitRunner.class)
+
 public class FelineTest {
 
 
-    @Spy
-    Feline feline;
+    Feline feline = new Feline();
 
     @Test
     public void testGetKittensWithCount() {
         int expectedKittens = 3;
-        Mockito.when(feline.getKittens(expectedKittens)).thenReturn(expectedKittens);
-        int result = feline.getKittens(expectedKittens);
-
-        assertEquals(expectedKittens, result);
+        int actualKittens = feline.getKittens(3);
+        assertEquals(expectedKittens, actualKittens);
     }
 
 
@@ -45,7 +39,7 @@ public class FelineTest {
 
     @Test
     public void testGetKittens() {
-        System.out.println("Ожидаемое количество котят  " + feline.getKittens());
+        System.out.println("Количество котят  " + feline.getKittens());
         assertEquals(1, feline.getKittens());
     }
 
